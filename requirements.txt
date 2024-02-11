@@ -18,12 +18,26 @@ click==8.1.7
     #   pip-tools
 django==5.0.2
     # via -r requirements.in
+flake8==7.0.0
+    # via -r requirements.in
+mccabe==0.7.0
+    # via
+    #   -r requirements.in
+    #   flake8
 packaging==23.2
     # via
     #   -r requirements.in
     #   build
 pip-tools==7.3.0
     # via -r requirements.in
+pycodestyle==2.11.1
+    # via
+    #   -r requirements.in
+    #   flake8
+pyflakes==3.2.0
+    # via
+    #   -r requirements.in
+    #   flake8
 pyproject-hooks==1.0.0
     # via
     #   -r requirements.in
