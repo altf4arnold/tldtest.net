@@ -29,12 +29,12 @@ class TLD(models.Model):
 
     )
     tld = models.CharField(max_length=30)
-    dnssec = models.CharField(max_length=5, default=300, choices=DNSSECALGOS)
-    inet = models.CharField(max_length=1, default=0, choices=INET)
+    dnssec = models.IntegerField(default=300, choices=DNSSECALGOS)
+    inet = models.IntegerField(default=0, choices=INET)
     lastEdition = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.TLD
+        return self.tld
 
     class Meta:
         indexes = [
