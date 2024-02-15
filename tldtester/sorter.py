@@ -3,6 +3,9 @@ This file is dumping the IANA root zone and sorting it in the database
 Link to IANA website : https://www.internic.net/domain/root.zone
 """
 import urllib.request
+import zonefile_parser
+import json
+from tldtester.models import zonecontent
 
 
 def downloader():
@@ -22,13 +25,32 @@ def sorter(rawdata):
     """
     This file removes the tabs and line breaks from rawdata
     returns as a list with dictionary in it
+    :returns: a list of dictionaries
     """
-    print(str(rawdata))
+    encodeddata = zonefile_parser.parse(rawdata)
+    properdata = []
+    for line in encodeddata:
+        properdata.append(dict(json.loads(str(line).replace("'", '"'))))
+    return properdata
+
+
+def dbwriter(data):
+    """
+    Writes everything in the Zone database
+    """
+    for line in data:
+        DB = zonecontent()
+        DB.rtype = line["rtype"]
+        DB.name = line["name"]
+        DB.rclass = line["rclass"]
+        DB.data = line["rdata"]
+        DB.ttl = int(line["ttl"])
+        DB.save()
 
 
 def main():
     try:
-        sorter(downloader())
+        dbwriter(sorter(downloader()))
     except Exception as e:
         print(e)
 
