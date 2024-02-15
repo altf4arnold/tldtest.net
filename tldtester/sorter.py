@@ -30,21 +30,23 @@ def sorter(rawdata):
     encodeddata = zonefile_parser.parse(rawdata)
     properdata = []
     for line in encodeddata:
-        properdata.append(dict(json.loads(str(line).replace("'",'"'))))
+        properdata.append(dict(json.loads(str(line).replace("'", '"'))))
     return properdata
+
 
 def dbwriter(data):
     """
     Writes everything in the Zone database
     """
     for line in data:
-        DB=zonecontent()
+        DB = zonecontent()
         DB.rtype = line["rtype"]
         DB.name = line["name"]
         DB.rclass = line["rclass"]
         DB.data = line["rdata"]
         DB.ttl = int(line["ttl"])
         DB.save()
+
 
 def main():
     try:

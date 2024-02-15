@@ -22,4 +22,4 @@ class zone(ExtraButtonsMixin, admin.ModelAdmin):
 
 
 admin.site.register(TLD, tlds)
-admin.site.register(zonecontent,zone)
+admin.site.register(zonecontent, zone)

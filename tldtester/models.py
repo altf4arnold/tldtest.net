@@ -44,6 +44,7 @@ class TLD(models.Model):
             models.Index(fields=["inet"]),
         ]
 
+
 class zonecontent(models.Model):
     rtype = models.CharField(max_length=10)
     name = models.CharField(max_length=100)
@@ -51,6 +52,7 @@ class zonecontent(models.Model):
     ttl = models.CharField(max_length=5)
     data = models.CharField(max_length=1000)
     lastEdition = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return self.name
 
