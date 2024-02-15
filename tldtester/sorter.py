@@ -4,6 +4,7 @@ Link to IANA website : https://www.internic.net/domain/root.zone
 """
 import urllib.request
 import zonefile_parser
+import json
 from tldtester.models import zonecontent
 
 
@@ -24,16 +25,19 @@ def sorter(rawdata):
     """
     This file removes the tabs and line breaks from rawdata
     returns as a list with dictionary in it
+    :returns: a list of dictionaries
     """
     encodeddata = zonefile_parser.parse(rawdata)
-    return encodeddata
+    properdata = []
+    for line in encodeddata:
+        properdata.append(dict(json.loads(str(line).replace("'",'"'))))
+    return properdata
 
 def dbwriter(data):
     """
     Writes everything in the Zone database
     """
     for line in data:
-        print(line)
         DB=zonecontent()
         DB.rtype = line["rtype"]
         DB.name = line["name"]
