@@ -5,8 +5,6 @@ from django.views.generic import TemplateView
 class Index(TemplateView):
     template_name = 'home.html'
 
-def home(request):
-    return render(request, 'home.html')
 
 """
 def handler404(request):
