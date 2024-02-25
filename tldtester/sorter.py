@@ -34,7 +34,6 @@ def dbwriter(recs):
     db.nsamount = recs["nsserveramount"]
     db.v4nsamount = recs["v4resolvers"]
     db.v6nsamount = recs["v6resolvers"]
-    print(recs["tld"] + str(recs['algo']))
     db.dnssec = recs["algo"]
     db.save()
 
@@ -68,14 +67,15 @@ def grabber(data):
             ds = dns.resolver.resolve(tld, 'DS')
             for dsrecord in ds:
                 algo = dsrecord.to_text()
-                algo.split()
-                dnsseckeys.append(int(algo[1]))
-            algo = max((list(dict.fromkeys(dnsseckeys))))
+                line = algo.split()
+                dnsseckeys.append(int(line[1]))
+            algo = max(list(dict.fromkeys(dnsseckeys)))
         except Exception as e:
             algo = 400
+            print(e)
 
         results = {"tld": tld, "nsserveramount": int(len((nsservers))), "v4resolvers": Arecords,
-                   "v6resolvers": AAAArecords, "algo" : algo}
+                   "v6resolvers": AAAArecords, "algo": algo}
         dbwriter(results)
 
 
