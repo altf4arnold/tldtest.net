@@ -5,7 +5,6 @@ class TLD(models.Model):
     """
     Model for the TLDs validation
     """
-    INET = ((0, "IPv4"), (1, "IPv6"), (2, "IPv4 + IPv6"),)
     DNSSECALGOS = (
         (0, "Delete DS"),
         (1, "RSA/MD5"),
@@ -29,9 +28,11 @@ class TLD(models.Model):
         (300, "Unknown"),
 
     )
-    tld = models.CharField(max_length=30)
+    tld = models.CharField(max_length=30, primary_key=True)
+    nsamount = models.IntegerField(default=0)
+    v4nsamount = models.IntegerField(default=0)
+    v6nsamount = models.IntegerField(default=0)
     dnssec = models.IntegerField(default=300, choices=DNSSECALGOS)
-    inet = models.IntegerField(default=0, choices=INET)
     lastEdition = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -41,22 +42,5 @@ class TLD(models.Model):
         indexes = [
             models.Index(fields=["tld"]),
             models.Index(fields=["dnssec"]),
-            models.Index(fields=["inet"]),
-        ]
-
-
-class zonecontent(models.Model):
-    rtype = models.CharField(max_length=10)
-    name = models.CharField(max_length=100)
-    rclass = models.CharField(max_length=10)
-    ttl = models.CharField(max_length=5)
-    data = models.CharField(max_length=1000)
-    lastEdition = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        indexes = [
-            models.Index(fields=["name"]),
+            models.Index(fields=["nsamount"]),
         ]
