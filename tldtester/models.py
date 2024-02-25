@@ -26,7 +26,7 @@ class TLD(models.Model):
         (253, "private algorithm"),
         (254, "private algorithm OID"),
         (300, "Unknown"),
-
+        (400, "None"),
     )
     tld = models.CharField(max_length=30, primary_key=True)
     nsamount = models.IntegerField(default=0)

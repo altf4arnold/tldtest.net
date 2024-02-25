@@ -7,7 +7,7 @@ import threading
 
 
 class tlds(ExtraButtonsMixin, admin.ModelAdmin):
-    list_display = ('tld', 'nsamount', 'v4nsamount', 'v6nsamount', 'lastEdition')
+    list_display = ('tld', 'nsamount', 'v4nsamount', 'v6nsamount', 'dnssec', 'lastEdition')
 
     @button(change_form=True, html_attrs={'style': 'background-color:#88FF88;color:black'})
     def refresh(self, request):
