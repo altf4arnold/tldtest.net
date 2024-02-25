@@ -3,8 +3,7 @@ This file is dumping the IANA root zone and sorting it in the database
 Link to IANA website : https://www.internic.net/domain/root.zone
 """
 import urllib.request
-import json
-# from tldtester.models import zonecontent, TLD
+from tldtester.models import TLD
 import dns.resolver
 
 
@@ -23,11 +22,54 @@ def downloader():
     return raw
 
 
+def dbwriter(recs):
+    """
+    Writes the dictionnary values in the database
+    """
+    if TLD.objects.filter(tld=recs["tld"]).exists():
+        db = TLD.objects.get(tld=recs["tld"])
+    else:
+        db = TLD()
+        db.tld = recs["tld"]
+    db.nsamount = recs["nsserveramount"]
+    db.v4nsamount = recs["v4resolvers"]
+    db.v6nsamount = recs["v6resolvers"]
+    db.save()
+
+
+def grabber(data):
+    """
+    This function takes the TLD's and makes querrys to the DNS. It looks up how many authoritative DNS's there are and
+    analyses the v4, v6 and DNSSEC. Returns a list of dictionaries with all the vallues to write in the database
+    """
+    for tld in data:
+        nsservers = []
+        Arecords = 0
+        AAAArecords = 0
+        ns = dns.resolver.resolve(tld, 'NS')
+        for server in ns:
+            nsservers.append(server.to_text())
+        for Arecord in nsservers:
+            try:
+                dns.resolver.resolve(Arecord, 'A')
+                Arecords += 1
+            except Exception as e:
+                print(e)
+        for AAAArecord in nsservers:
+            try:
+                dns.resolver.resolve(AAAArecord, 'AAAA')
+                AAAArecords += 1
+            except Exception as e:
+                print(e)
+
+        results = {"tld": tld, "nsserveramount": int(len((nsservers))), "v4resolvers": Arecords,
+                   "v6resolvers": AAAArecords}
+        dbwriter(results)
+
+
 def main():
     try:
-        data = sorter(downloader())
-        dbwriter(data)
-        print(data)
+        grabber(downloader())
     except Exception as e:
         print(e)
 
