@@ -12,4 +12,3 @@ pycodestyle==2.11.1
 pyflakes==3.2.0
 pyproject_hooks==1.0.0
 sqlparse==0.4.4
-zonefile-parser==0.1.14
