@@ -44,3 +44,18 @@ class TLD(models.Model):
             models.Index(fields=["dnssec"]),
             models.Index(fields=["nsamount"]),
         ]
+
+
+class RootZone(models.Model):
+    name = models.CharField(max_length=50)
+    type = models.CharField(max_length=10)
+    value = models.CharField(max_length=4096)
+
+    def __str__(self):
+        return self.tld
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["name"]),
+            models.Index(fields=["type"]),
+        ]
