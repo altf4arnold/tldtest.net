@@ -33,6 +33,7 @@ class TLD(models.Model):
     v4nsamount = models.IntegerField(default=0)
     v6nsamount = models.IntegerField(default=0)
     dnssec = models.IntegerField(default=300, choices=DNSSECALGOS)
+    amountofkeys = models.IntegerField(default=0)
     lastEdition = models.DateTimeField(auto_now=True)
 
     def __str__(self):
