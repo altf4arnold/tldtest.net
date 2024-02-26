@@ -17,8 +17,14 @@ click==8.1.7
     #   -r requirements.in
     #   pip-tools
 django==5.0.2
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   django-appconf
 django-admin-extra-buttons==1.5.7
+    # via -r requirements.in
+django-appconf==1.0.6
+    # via django-compressor
+django-compressor==4.4
     # via -r requirements.in
 flake8==7.0.0
     # via -r requirements.in
@@ -44,6 +50,10 @@ pyproject-hooks==1.0.0
     # via
     #   -r requirements.in
     #   build
+rcssmin==1.1.1
+    # via django-compressor
+rjsmin==1.2.1
+    # via django-compressor
 sqlparse==0.4.4
     # via
     #   -r requirements.in
