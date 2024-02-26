@@ -33,6 +33,7 @@ class TLD(models.Model):
     v4nsamount = models.IntegerField(default=0)
     v6nsamount = models.IntegerField(default=0)
     dnssec = models.IntegerField(default=300, choices=DNSSECALGOS)
+    amountofkeys = models.IntegerField(default=0)
     lastEdition = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -43,4 +44,20 @@ class TLD(models.Model):
             models.Index(fields=["tld"]),
             models.Index(fields=["dnssec"]),
             models.Index(fields=["nsamount"]),
+        ]
+
+
+class RootZone(models.Model):
+    name = models.CharField(max_length=50)
+    rectype = models.CharField(max_length=10)
+    value = models.CharField(max_length=4096)
+    lastEdition = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["name"]),
+            models.Index(fields=["rectype"]),
         ]
