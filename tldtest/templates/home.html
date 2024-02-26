@@ -1,4 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-Hello World
+    <table>
+        <thead>
+        <tr>
+            <th>Top Level Domain</th>
+            <th>Amount of NS servers</th>
+            <th>IPv4 compatible NS servers</th>
+            <th>IPv6 compatible NS servers</th>
+            <th>Strongest DNSSEC algo available</th>
+            <th>Amount of DNSSEC keys</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for TLD in object_list %}
+            <tr>
+                <td>{{ TLD.tld }}</td>
+                <td>{{ TLD.nsamount }}</td>
+                <td>{{ TLD.v4nsamount }}</td>
+                <td>{{ TLD.v6nsamount }}</td>
+                <td>{{ TLD.get_dnssec_display }}</td>
+                <td>{{ TLD.amountofkeys }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock content %}
