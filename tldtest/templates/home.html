@@ -1,27 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-    <table>
-        <thead>
-        <tr>
-            <th>Top Level Domain</th>
-            <th>Amount of NS servers</th>
-            <th>IPv4 compatible NS servers</th>
-            <th>IPv6 compatible NS servers</th>
-            <th>Strongest DNSSEC algo available</th>
-            <th>Amount of DNSSEC keys</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for TLD in object_list %}
-            <tr>
-                <td>{{ TLD.tld }}</td>
-                <td>{{ TLD.nsamount }}</td>
-                <td>{{ TLD.v4nsamount }}</td>
-                <td>{{ TLD.v6nsamount }}</td>
-                <td>{{ TLD.get_dnssec_display }}</td>
-                <td>{{ TLD.amountofkeys }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="grid gap-4">
+        <div class="row-start-2">
+            <div class="flex justify-center">
+                <table class="table-auto border-separate border border-slate-500">
+                    <thead>
+                    <tr>
+                        <th class="border border-slate-600">Top Level Domain</th>
+                        <th class="border border-slate-600">Amount of NS servers</th>
+                        <th class="border border-slate-600">IPv4 compatible NS servers</th>
+                        <th class="border border-slate-600">IPv6 compatible NS servers</th>
+                        <th class="border border-slate-600">Strongest DNSSEC algo available</th>
+                        <th class="border border-slate-600">Amount of DNSSEC keys</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for TLD in object_list %}
+                        <tr>
+                            <td class="border border-slate-700">{{ TLD.tld }}</td>
+                            <td class="border border-slate-700">{{ TLD.nsamount }}</td>
+                            <td class="border border-slate-700">{{ TLD.v4nsamount }}</td>
+                            <td class="border border-slate-700">{{ TLD.v6nsamount }}</td>
+                            <td class="border border-slate-700">{{ TLD.get_dnssec_display }}</td>
+                            <td class="border border-slate-700">{{ TLD.amountofkeys }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

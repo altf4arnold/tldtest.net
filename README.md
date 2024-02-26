@@ -10,3 +10,22 @@ pip install -r requirements.txt
 ./manage.py migrate
 ./manage.py runserver
 ```
+
+
+# When running in debug False :
+```
+./manage.py collectstatic
+./manage.py runserver --insecure
+```
+
+# CSS : 
+To install the CSS bundler : 
+```
+npm install -D tailwindcss
+npx tailwindcss init
+```
+
+To update CSS files (they use the tailwinds framework)
+```
+npx tailwindcss -i ./static/src/input.css -o ./static/src/output.css
+```
