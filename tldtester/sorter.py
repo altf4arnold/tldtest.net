@@ -133,7 +133,7 @@ def grabber(data):
                 algo = 300
 
         results = {"tld": tld, "nsserveramount": int(len((nsservers))), "v4resolvers": Arecords,
-                   "v6resolvers": AAAArecords, "algo": algo, "amountkeys": amountofkeys}
+                   "v6resolvers": AAAArecords, "algo": algo, "amountofkeys": amountofkeys}
         tlddbwriter(results)
 
 
