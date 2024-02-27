@@ -15,11 +15,14 @@ class Index(ListView):
         object_list = TLD.objects.all()
         return object_list
 
+
 class About(TemplateView):
-    template_name= 'about.html'
+    template_name = 'about.html'
+
 
 class Latency(TemplateView):
     template_name = 'latency.html'
+
 
 def handler404(request):
     return render(request, '404.html', status=404)
