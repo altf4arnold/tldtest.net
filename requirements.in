@@ -3,6 +3,7 @@ build==1.0.3
 click==8.1.7
 Django==5.0.2
 django-admin-extra-buttons==1.5.7
+django-compressor==4.4
 flake8==7.0.0
 mccabe==0.7.0
 packaging==23.2
@@ -11,3 +12,4 @@ pycodestyle==2.11.1
 pyflakes==3.2.0
 pyproject_hooks==1.0.0
 sqlparse==0.4.4
+
