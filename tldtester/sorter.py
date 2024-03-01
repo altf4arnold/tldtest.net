@@ -2,6 +2,7 @@
 This file is dumping the IANA root zone and sorting it in the database
 Link to IANA website : https://www.internic.net/domain/root.zone
 """
+import json
 import urllib.request
 from tldtester.models import TLD, RootZone
 from django.core.exceptions import MultipleObjectsReturned
@@ -77,11 +78,13 @@ def tlddbwriter(recs):
     else:
         db = TLD()
         db.tld = recs["tld"]
+    db.unicodetld = recs["unicodeTld"]
     db.nsamount = recs["nsserveramount"]
     db.v4nsamount = recs["v4resolvers"]
     db.v6nsamount = recs["v6resolvers"]
     db.dnssec = recs["algo"]
     db.amountofkeys = recs["amountofkeys"]
+    db.organisation = recs["organisation"]
     db.save()
 
 
@@ -131,9 +134,30 @@ def grabber(data):
             except Exception as e:
                 print(tld + " DNSSEC " + e)
                 algo = 300
+        # Who registers the thing and get unicode
+        rdap = urllib.request.urlopen("https://root.rdap.org/domain/" + tld)
+        if rdap.getcode() == 200:
+            raw = rdap.read()
+            raw = raw.decode("utf-8")
+            data = json.loads(raw)
+            try:
+                if "xn--" in tld:
+                    unicodetld = data["unicodeName"]
+                else:
+                    unicodetld = tld
+            except Exception as e:
+                unicodetld = tld
+                print(tld)
+                print(e)
+            for entity in data["entities"]:
+                try:
+                    organisation = entity["vcardArray"][1][2][3]
+                except:
+                    organisation = "Reserved"
 
-        results = {"tld": tld, "nsserveramount": int(len((nsservers))), "v4resolvers": Arecords,
-                   "v6resolvers": AAAArecords, "algo": algo, "amountofkeys": amountofkeys}
+        results = {"tld": tld, "unicodeTld": unicodetld, "nsserveramount": int(len((nsservers))),
+                   "organisation": organisation, "v4resolvers": Arecords, "v6resolvers": AAAArecords, "algo": algo,
+                   "amountofkeys": amountofkeys}
         tlddbwriter(results)
 
 
