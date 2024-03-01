@@ -1,0 +1,43 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: master
+  cancel-in-progress: true
+
+jobs:
+  flake:
+    name: flake
+    uses: ./.github/workflows/flake.yml
+  django:
+    name: django
+    uses: ./.github/workflows/django.yml
+  deploy:
+    name: Deploy
+    needs: [ flake, django ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          kdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/github
+          chmod 600 ~/.ssh/github
+          cat >>~/.ssh/config <<END
+          Host target
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/github
+            LogLevel ERROR
+            StrictHostKeyChecking no
+          END
+      - name: Run Deploy
+        run: |
+          ssh target "cd /opt/tldtest/ && git pull && pip install -r requirements.txt && ./manage.py makemigrations && ./manage.py migrate && systemctl restart tldtest"
