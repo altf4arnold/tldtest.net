@@ -7,7 +7,7 @@ django-compressor==4.4
 flake8==7.0.0
 mccabe==0.7.0
 packaging==23.2
-pip-tools==7.3.0
+pip-tools==7.4.0
 pycodestyle==2.11.1
 pyflakes==3.2.0
 pyproject_hooks==1.0.0

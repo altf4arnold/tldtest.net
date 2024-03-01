@@ -36,7 +36,7 @@ packaging==23.2
     # via
     #   -r requirements.in
     #   build
-pip-tools==7.3.0
+pip-tools==7.4.0
     # via -r requirements.in
 pycodestyle==2.11.1
     # via
@@ -50,6 +50,7 @@ pyproject-hooks==1.0.0
     # via
     #   -r requirements.in
     #   build
+    #   pip-tools
 rcssmin==1.1.1
     # via django-compressor
 rjsmin==1.2.1
