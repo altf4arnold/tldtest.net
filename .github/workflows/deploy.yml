@@ -10,12 +10,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  flake:
-    name: flake
-    uses: ./.github/workflows/flake.yml
-  django:
-    name: django
-    uses: ./.github/workflows/django.yml
   deploy:
     name: Deploy
     needs: [ flake, django ]
