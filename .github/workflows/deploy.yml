@@ -33,4 +33,4 @@ jobs:
           END
       - name: Run Deploy
         run: |
-          ssh target "cd tldtest && git pull origin master && docker-compose down && docker-compose up --build"
+          ssh target "cd tldtest && git pull origin master && docker-compose down && docker-compose up --build --no-attach"
