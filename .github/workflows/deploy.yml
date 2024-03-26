@@ -33,4 +33,4 @@ jobs:
           END
       - name: Run Deploy
         run: |
-          cd tldtest.net && docker-compose down && git pull origin master && docker-compose up --build
+          cd tldtest && docker-compose down && git pull origin master && docker-compose up --build
