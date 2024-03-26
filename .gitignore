@@ -175,3 +175,4 @@ cython_debug/
 #.idea/
 # Avoiding public key leakage
 /config.py
+/env.prod.db
