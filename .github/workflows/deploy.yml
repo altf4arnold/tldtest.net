@@ -40,4 +40,4 @@ jobs:
           END
       - name: Run Deploy
         run: |
-          ssh target "cd /opt/tldtest/ && git pull && pip install -r requirements.txt && ./manage.py makemigrations && ./manage.py migrate && systemctl restart tldtest"
+          docker-compose down && git pull origin master @@ docker-compose up --build
