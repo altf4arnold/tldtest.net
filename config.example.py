@@ -7,3 +7,5 @@ ALLOWED_HOSTS = []
 DBUSER = "tldtest"
 
 DBPASSWORD = "clubmate2010"
+
+CSRF_TRUSTED_ORIGINS = []
