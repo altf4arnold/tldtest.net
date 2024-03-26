@@ -28,15 +28,15 @@ class TLD(models.Model):
         (300, "Unknown"),
         (400, "None"),
     )
-    tld = models.CharField(max_length=100, primary_key=True)
-    unicodetld = models.CharField(max_length=100)
+    tld = models.CharField(max_length=30, primary_key=True)
+    unicodetld = models.CharField(max_length=30)
     nsamount = models.IntegerField(default=0)
     v4nsamount = models.IntegerField(default=0)
     v6nsamount = models.IntegerField(default=0)
     dnssec = models.IntegerField(default=300, choices=DNSSECALGOS)
     amountofkeys = models.IntegerField(default=0)
     lastEdition = models.DateTimeField(auto_now=True)
-    organisation = models.CharField(max_length=100)
+    organisation = models.CharField(max_length=30)
 
     def __str__(self):
         return self.tld

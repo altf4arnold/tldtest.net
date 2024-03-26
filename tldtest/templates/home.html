@@ -18,7 +18,7 @@
                     <tbody>
                     {% for TLD in object_list %}
                         <tr>
-                            <td class="border border-slate-700">.{{ TLD.unicodetld }}</td>
+                            <td class="border border-slate-700">{{ TLD.unicodetld }}</td>
                             <td class="border border-slate-700 text-l-blue-600">{{ TLD.nsamount }}</td>
                             <td class="border border-slate-700 text-red-700">{{ TLD.v4nsamount }}</td>
                             <td class="border border-slate-700 text-green-600">{{ TLD.v6nsamount }}</td>
