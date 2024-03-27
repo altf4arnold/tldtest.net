@@ -22,7 +22,7 @@
                             <td class="border border-slate-700 text-l-blue-600">{{ TLD.nsamount }}</td>
                             <td class="border border-slate-700 text-red-700">{{ TLD.v4nsamount }}</td>
                             <td class="border border-slate-700 text-green-600">{{ TLD.v6nsamount }}</td>
-                            <td class="border border-slate-700">{{ TLD.get_dnssec_display }}</td>
+                            <td class="border border-slate-700">{% if TLD.dnssec != 400 %} Algo {{ TLD.dnssec }} {{ TLD.get_dnssec_display }} {% else %} {{ TLD.get_dnssec_display }} {% endif %}</td>
                             <td class="border border-slate-700">{{ TLD.amountofkeys }}</td>
                             <td class="border border-slate-700">{{ TLD.organisation }}</td>
                         </tr>
