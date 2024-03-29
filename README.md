@@ -18,6 +18,13 @@ pip install -r requirements.txt
 ./manage.py runserver --insecure
 ```
 
+# Static files :
+The static files need to be hosted outside the gunicorn. So I choose to store them on github pages (for now). Which means that every time the statics get changed, one need to run :
+```
+./manage.py collectstatic
+git add staticfiles/.
+```
+
 # CSS : 
 To install the CSS bundler : 
 ```
