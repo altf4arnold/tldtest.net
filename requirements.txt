@@ -41,7 +41,7 @@ packaging==24.0
     #   -r requirements.in
     #   build
     #   gunicorn
-pip-tools==7.3.0
+pip-tools==7.4.1
     # via -r requirements.in
 psycopg2-binary==2.9.9
     # via -r requirements.in
@@ -57,6 +57,7 @@ pyproject-hooks==1.0.0
     # via
     #   -r requirements.in
     #   build
+    #   pip-tools
 rcssmin==1.1.1
     # via
     #   -r requirements.in
