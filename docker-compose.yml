@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     command: gunicorn tldtest.wsgi:application -b 0.0.0.0:8000 --timeout 600
     ports:
-      - 8000:8000
+      - "127.0.0.1:8000:8000"
     depends_on:
       - db
   db:
