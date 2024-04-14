@@ -37,6 +37,8 @@ class TLD(models.Model):
     amountofkeys = models.IntegerField(default=0)
     lastEdition = models.DateTimeField(auto_now=True)
     organisation = models.CharField(max_length=100)
+    rdap = models.CharField(max_length=10, default="No")
+    link = models.CharField(max_length=800, default="https://tldtest.net/")
 
     def __str__(self):
         return self.tld

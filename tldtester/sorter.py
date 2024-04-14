@@ -3,6 +3,7 @@ This file is dumping the IANA root zone and sorting it in the database
 Link to IANA website : https://www.internic.net/domain/root.zone
 """
 import json
+import config
 import urllib.request
 from tldtester.models import TLD, RootZone
 from django.core.exceptions import MultipleObjectsReturned
@@ -44,6 +45,8 @@ def zonesorter(zonefile):
     Takes the zonefile as an input and writes the records to the database
     """
     for line in zonefile:
+        if config.DEBUG is True:
+            print(line)
         value = ""
         record = line.split()
         if len(record) >= 5:
@@ -56,6 +59,8 @@ def zonesorter(zonefile):
                     value = value + record[i + 4] + " "
         towrite = {"name": name, "type": recordtype, "value": value}
         zonedbwriter(towrite)
+    if config.DEBUG is True:
+        print("Done Parsing the Zones")
 
 
 def zonedbwriter(recs):
@@ -85,20 +90,25 @@ def tlddbwriter(recs):
     db.dnssec = recs["algo"]
     db.amountofkeys = recs["amountofkeys"]
     db.organisation = recs["organisation"]
+    db.link = recs["link"]
+    db.rdap = recs["rdap"]
     db.save()
 
 
-def grabber(data):
+def grabber(data, rdaptlds):
     """
     This function takes the TLD's and makes querrys to the DNS. It looks up how many authoritative DNS's there are and
     analyses the v4, v6 and DNSSEC. Returns a list of dictionaries with all the vallues to write in the database
     """
     for tld in data:
+        if config.DEBUG is True:
+            print("starting with " + tld)
         nsservers = []
         dnsseckeys = []
         Arecords = 0
         AAAArecords = 0
         amountofkeys = 0
+        link = "https://tldtest.net"
         nses = RootZone.objects.all().filter(name=tld + ".", rectype="NS")
         for ns in nses:
             nsservers.append(ns.value)
@@ -154,23 +164,54 @@ def grabber(data):
                     organisation = entity["vcardArray"][1][2][3]
                 except:
                     organisation = "Reserved"
+            try:
+                link = data["links"][2]["href"]
+            except Exception as e:
+                print("link not found for " + tld)
+                print(e)
+        if tld in rdaptlds:
+            rdap = "Yes"
+        else:
+            rdap = "No"
 
         results = {"tld": tld, "unicodeTld": unicodetld, "nsserveramount": int(len((nsservers))),
                    "organisation": organisation, "v4resolvers": Arecords, "v6resolvers": AAAArecords, "algo": algo,
-                   "amountofkeys": amountofkeys}
+                   "amountofkeys": amountofkeys, "link": link, "rdap": rdap}
+        if config.DEBUG is True:
+            print(results)
         tlddbwriter(results)
+
+
+def rdaper():
+    """
+    Downloads the RDAP link database from IANA and creates a list of all the tlds that currently support it.
+    returns either a full or an empty list.
+    """
+    rdaptlds = []
+    url = urllib.request.urlopen("https://data.iana.org/rdap/dns.json")
+    if url.getcode() == 200:
+        raw = url.read()
+        raw = raw.decode("utf-8")
+    else:
+        raw = None
+    data = json.loads(raw)
+    for i in data["services"]:
+        for j in i[0]:
+            rdaptlds.append(j)
+    return rdaptlds
 
 
 def main():
     try:
         zonefile = zonedownloader().splitlines(True)
+        rdaptlds = rdaper()
         if zonefile is not None:
             # First delete the entire zone database if file polling is successful and re write
             RootZone.objects.all().delete()
             zonesorter(zonefile)
         tlds = tlddownloader()
         if tlds is not None:
-            grabber(tlds)
+            grabber(tlds, rdaptlds)
     except Exception as e:
         print(e)
 
