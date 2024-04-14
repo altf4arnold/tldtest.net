@@ -184,8 +184,8 @@ def grabber(data, rdaptlds):
 
 def rdaper():
     """
-    Downloads the root zone (as to not put constraint on the DNSses and resolve locally). Returns the zonefile in lines.
-    returns None if not working.
+    Downloads the RDAP link database from IANA and creates a list of all the tlds that currently support it.
+    returns either a full or an empty list.
     """
     rdaptlds = []
     url = urllib.request.urlopen("https://data.iana.org/rdap/dns.json")
@@ -199,6 +199,7 @@ def rdaper():
         for j in i[0]:
             rdaptlds.append(j)
     return rdaptlds
+
 
 def main():
     try:
