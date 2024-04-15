@@ -66,7 +66,7 @@ rjsmin==1.2.1
     # via
     #   -r requirements.in
     #   django-compressor
-sqlparse==0.4.4
+sqlparse==0.5.0
     # via
     #   -r requirements.in
     #   django
