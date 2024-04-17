@@ -30,7 +30,7 @@ django-compressor==4.4
     # via -r requirements.in
 flake8==7.0.0
     # via -r requirements.in
-gunicorn==21.2.0
+gunicorn==22.0.0
     # via -r requirements.in
 mccabe==0.7.0
     # via
