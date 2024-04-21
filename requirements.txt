@@ -8,18 +8,45 @@ asgiref==3.8.1
     # via
     #   -r requirements.in
     #   django
+bcrypt==4.1.2
+    # via
+    #   -r requirements.in
+    #   paramiko
 build==1.2.1
     # via
     #   -r requirements.in
     #   pip-tools
+certifi==2024.2.2
+    # via
+    #   -r requirements.in
+    #   requests
+cffi==1.16.0
+    # via
+    #   -r requirements.in
+    #   cryptography
+    #   pynacl
+charset-normalizer==3.3.2
+    # via
+    #   -r requirements.in
+    #   requests
 click==8.1.7
     # via
     #   -r requirements.in
     #   pip-tools
+configparser==6.0.1
+    # via
+    #   -r requirements.in
+    #   exscript
+cryptography==42.0.5
+    # via
+    #   -r requirements.in
+    #   paramiko
 django==5.0.3
     # via
     #   -r requirements.in
     #   django-appconf
+    #   django-filter
+    #   djangorestframework
 django-admin-extra-buttons==1.5.7
     # via -r requirements.in
 django-appconf==1.0.6
@@ -28,9 +55,25 @@ django-appconf==1.0.6
     #   django-compressor
 django-compressor==4.4
     # via -r requirements.in
+django-filter==24.2
+    # via -r requirements.in
+djangorestframework==3.15.1
+    # via -r requirements.in
+exscript==2.6.28
+    # via -r requirements.in
 flake8==7.0.0
     # via -r requirements.in
+future==1.0.0
+    # via
+    #   -r requirements.in
+    #   exscript
 gunicorn==22.0.0
+    # via -r requirements.in
+idna==3.6
+    # via
+    #   -r requirements.in
+    #   requests
+markdown==3.6
     # via -r requirements.in
 mccabe==0.7.0
     # via
@@ -41,6 +84,10 @@ packaging==24.0
     #   -r requirements.in
     #   build
     #   gunicorn
+paramiko==3.4.0
+    # via
+    #   -r requirements.in
+    #   exscript
 pip-tools==7.4.1
     # via -r requirements.in
 psycopg2-binary==2.9.9
@@ -49,10 +96,22 @@ pycodestyle==2.11.1
     # via
     #   -r requirements.in
     #   flake8
+pycparser==2.21
+    # via
+    #   -r requirements.in
+    #   cffi
+pycryptodomex==3.20.0
+    # via
+    #   -r requirements.in
+    #   exscript
 pyflakes==3.2.0
     # via
     #   -r requirements.in
     #   flake8
+pynacl==1.5.0
+    # via
+    #   -r requirements.in
+    #   paramiko
 pyproject-hooks==1.0.0
     # via
     #   -r requirements.in
@@ -62,6 +121,8 @@ rcssmin==1.1.1
     # via
     #   -r requirements.in
     #   django-compressor
+requests==2.31.0
+    # via -r requirements.in
 rjsmin==1.2.1
     # via
     #   -r requirements.in
@@ -74,6 +135,10 @@ tomli==2.0.1
     # via -r requirements.in
 typing-extensions==4.10.0
     # via -r requirements.in
+urllib3==2.2.1
+    # via
+    #   -r requirements.in
+    #   requests
 wheel==0.42.0
     # via pip-tools
 
