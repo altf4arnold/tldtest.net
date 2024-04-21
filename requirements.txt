@@ -59,10 +59,6 @@ django-filter==24.2
     # via -r requirements.in
 djangorestframework==3.15.1
     # via -r requirements.in
-dnspython==2.0.0
-    # via
-    #   -r requirements.in
-    #   ipwhois
 exscript==2.6.28
     # via -r requirements.in
 flake8==7.0.0
@@ -71,15 +67,12 @@ future==1.0.0
     # via
     #   -r requirements.in
     #   exscript
-    #   python-whois
 gunicorn==22.0.0
     # via -r requirements.in
 idna==3.6
     # via
     #   -r requirements.in
     #   requests
-ipwhois==1.2.0
-    # via -r requirements.in
 markdown==3.6
     # via -r requirements.in
 mccabe==0.7.0
@@ -124,10 +117,6 @@ pyproject-hooks==1.0.0
     #   -r requirements.in
     #   build
     #   pip-tools
-python-whois==0.8.0
-    # via -r requirements.in
-python-whois-extended==0.7.12
-    # via -r requirements.in
 rcssmin==1.1.1
     # via
     #   -r requirements.in
