@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .models import TLD, RootZone
 from rest_framework import serializers, viewsets
 from django.db.models import Q
+
+
 # Create your views here.
 
 # REST API !
@@ -33,6 +35,7 @@ class TLDViewSet(viewsets.ModelViewSet):
         # Apply filters to queryset
         queryset = queryset.filter(filters)
         return queryset
+
 
 class RootZoneSerializer(serializers.ModelSerializer):
     class Meta:
