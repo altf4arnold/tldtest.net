@@ -3,7 +3,6 @@ This file is dumping the IANA root zone and sorting it in the database
 Link to IANA website : https://www.internic.net/domain/root.zone
 """
 import json
-import config
 import urllib.request
 from tldtester.models import TLD, RootZone
 from django.core.exceptions import MultipleObjectsReturned
@@ -45,8 +44,6 @@ def zonesorter(zonefile):
     Takes the zonefile as an input and writes the records to the database
     """
     for line in zonefile:
-        if config.DEBUG is True:
-            print(line)
         value = ""
         record = line.split()
         if len(record) >= 5:
@@ -59,8 +56,6 @@ def zonesorter(zonefile):
                     value = value + record[i + 4] + " "
         towrite = {"name": name, "type": recordtype, "value": value}
         zonedbwriter(towrite)
-    if config.DEBUG is True:
-        print("Done Parsing the Zones")
 
 
 def zonedbwriter(recs):
@@ -101,8 +96,6 @@ def grabber(data, rdaptlds):
     analyses the v4, v6 and DNSSEC. Returns a list of dictionaries with all the vallues to write in the database
     """
     for tld in data:
-        if config.DEBUG is True:
-            print("starting with " + tld)
         nsservers = []
         dnsseckeys = []
         Arecords = 0
@@ -147,8 +140,7 @@ def grabber(data, rdaptlds):
         # Who registers the thing and get unicode
         rdap = urllib.request.urlopen("https://root.rdap.org/domain/" + tld)
         if rdap.getcode() == 200:
-            raw = rdap.read()
-            raw = raw.decode("utf-8")
+            raw = rdap.read().decode("utf-8")
             data = json.loads(raw)
             try:
                 if "xn--" in tld:
@@ -177,8 +169,6 @@ def grabber(data, rdaptlds):
         results = {"tld": tld, "unicodeTld": unicodetld, "nsserveramount": int(len((nsservers))),
                    "organisation": organisation, "v4resolvers": Arecords, "v6resolvers": AAAArecords, "algo": algo,
                    "amountofkeys": amountofkeys, "link": link, "rdap": rdap}
-        if config.DEBUG is True:
-            print(results)
         tlddbwriter(results)
 
 
