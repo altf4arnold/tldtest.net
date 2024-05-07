@@ -3,7 +3,6 @@ This file is dumping the IANA root zone and sorting it in the database
 Link to IANA website : https://www.internic.net/domain/root.zone
 """
 import json
-import config
 import urllib.request
 from tldtester.models import TLD, RootZone
 from django.core.exceptions import MultipleObjectsReturned
@@ -59,8 +58,6 @@ def zonesorter(zonefile):
                     value = value + record[i + 4] + " "
         towrite = {"name": name, "type": recordtype, "value": value}
         zonedbwriter(towrite)
-    if config.DEBUG is True:
-        print("Done Parsing the Zones")
 
 
 def zonedbwriter(recs):
@@ -177,8 +174,6 @@ def grabber(data, rdaptlds):
         results = {"tld": tld, "unicodeTld": unicodetld, "nsserveramount": int(len((nsservers))),
                    "organisation": organisation, "v4resolvers": Arecords, "v6resolvers": AAAArecords, "algo": algo,
                    "amountofkeys": amountofkeys, "link": link, "rdap": rdap}
-        if config.DEBUG is True:
-            print(results)
         tlddbwriter(results)
 
 
