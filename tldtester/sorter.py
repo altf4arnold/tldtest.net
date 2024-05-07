@@ -44,8 +44,6 @@ def zonesorter(zonefile):
     Takes the zonefile as an input and writes the records to the database
     """
     for line in zonefile:
-        if config.DEBUG is True:
-            print(line)
         value = ""
         record = line.split()
         if len(record) >= 5:
@@ -98,8 +96,6 @@ def grabber(data, rdaptlds):
     analyses the v4, v6 and DNSSEC. Returns a list of dictionaries with all the vallues to write in the database
     """
     for tld in data:
-        if config.DEBUG is True:
-            print("starting with " + tld)
         nsservers = []
         dnsseckeys = []
         Arecords = 0
@@ -144,8 +140,7 @@ def grabber(data, rdaptlds):
         # Who registers the thing and get unicode
         rdap = urllib.request.urlopen("https://root.rdap.org/domain/" + tld)
         if rdap.getcode() == 200:
-            raw = rdap.read()
-            raw = raw.decode("utf-8")
+            raw = rdap.read().decode("utf-8")
             data = json.loads(raw)
             try:
                 if "xn--" in tld:
