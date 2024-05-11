@@ -1,0 +1,47 @@
+name: Django test and Flake 8
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  flake8:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.11 for Flake8
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.11"
+    - name: Install Flake8
+      run: |
+        pip install flake8
+    - name: Lint with Flake8
+      run: |
+        flake8 --ignore=E501,F401,E402,F811,E731,F403,E722 .
+
+  django:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.11]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }} for Django
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies for Django
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        cp config.example.py config.py
+    - name: Run Tests for Django
+      run: |
+        python manage.py test
