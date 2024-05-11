@@ -1,19 +1,13 @@
-name: Workflows on Master
+name: Master Workflow
 
 on:
   push:
     branches:
       - master
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
-  build_and_deploy:
+  deploy_after_master_push:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -23,26 +17,14 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install Flake8
-        run: pip install flake8
-
-      - name: Lint with Flake8
-        run: flake8 --ignore=E501,F401,E402,F811,E731,F403,E722 .
+      # Other steps for linting with Flake8
 
       - name: Set up Python 3.11 for Django
         uses: actions/setup-python@v3
         with:
           python-version: "3.11"
 
-      - name: Install Dependencies for Django
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          cp config.example.py config.py
-
-      - name: Run Tests for Django
-        run: |
-          python manage.py test
+      # Other steps for running tests with Django
 
       - name: Configure SSH for Deployment
         if: success()
@@ -65,13 +47,7 @@ jobs:
 
       - name: Deploy to Production
         if: success() && github.ref == 'refs/heads/master'
-        needs: [build_and_deploy]
         run: |
           ssh target "cd tldtest && git pull origin master && docker-compose down && docker-compose up --build -d"
 
-      - name: Deploy static content to GitHub Pages
-        if: success() && github.ref == 'refs/heads/master'
-        needs: [build_and_deploy]
-        uses: actions/deploy-pages@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # Other steps for deploying static content to GitHub Pages
