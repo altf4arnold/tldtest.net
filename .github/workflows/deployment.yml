@@ -63,3 +63,9 @@ jobs:
           ssh target "cd tldtest && git pull origin master && docker-compose down && docker-compose up --build -d"
 
       # Other steps for deploying static content to GitHub Pages
+      - name: Deploy static content to GitHub Pages
+        if: success() && github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./staticfiles
