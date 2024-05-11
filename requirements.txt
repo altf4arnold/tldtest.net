@@ -47,7 +47,7 @@ django==5.0.4
     #   django-appconf
     #   django-filter
     #   djangorestframework
-django-admin-extra-buttons==1.5.7
+django-admin-extra-buttons==1.5.8
     # via -r requirements.in
 django-appconf==1.0.6
     # via
