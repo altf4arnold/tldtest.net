@@ -12,7 +12,7 @@ class Index(ListView):
         Tutorial for this is on https://learndjango.com/tutorials/django-search-tutorial
         When writing more optimized search things, might be good reference
         """
-        object_list = TLD.objects.all()
+        object_list = TLD.objects.all().order_by('tld')
         return object_list
 
 
