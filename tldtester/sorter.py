@@ -138,7 +138,7 @@ def grabber(data, rdaptlds):
                 print(tld + " DNSSEC " + e)
                 algo = 300
         # Who registers the thing and get unicode
-        rdap = urllib.request.urlopen("https://root.rdap.org/domain/" + tld)
+        rdap = urllib.request.urlopen("https://rdap.iana.org/domain/" + tld)
         if rdap.getcode() == 200:
             raw = rdap.read().decode("utf-8")
             data = json.loads(raw)
@@ -157,7 +157,9 @@ def grabber(data, rdaptlds):
                 except:
                     organisation = "Reserved"
             try:
-                link = data["links"][2]["href"]
+                link = data["links"][0]["href"]
+                if "rdap" in link:
+                    link = "https://icannwiki.org/." + tld
             except Exception as e:
                 print("link not found for " + tld)
                 print(e)
