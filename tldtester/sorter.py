@@ -155,7 +155,7 @@ def grabber(data, rdaptlds):
                 try:
                     organisation = entity["vcardArray"][1][2][3]
                 except:
-                    organisation = "Reserved"
+                    organisation = "Reserved (here is the link to the ICANN wiki for more info)"
             try:
                 link = data["links"][0]["href"]
                 if "rdap" in link:
@@ -163,6 +163,7 @@ def grabber(data, rdaptlds):
             except Exception as e:
                 print("link not found for " + tld)
                 print(e)
+                link = "https://icannwiki.org/." + tld
         if tld in rdaptlds:
             rdap = "Yes"
         else:
