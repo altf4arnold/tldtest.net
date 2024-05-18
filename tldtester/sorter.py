@@ -157,7 +157,7 @@ def grabber(data, rdaptlds):
                 except:
                     organisation = "Reserved"
             try:
-                link = data["links"][2]["href"]
+                link = data["links"][0]["href"]
             except Exception as e:
                 print("link not found for " + tld)
                 print(e)
