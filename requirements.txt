@@ -121,7 +121,7 @@ rcssmin==1.1.1
     # via
     #   -r requirements.in
     #   django-compressor
-requests==2.31.0
+requests==2.32.0
     # via -r requirements.in
 rjsmin==1.2.1
     # via
