@@ -8,11 +8,23 @@ services:
       - "127.0.0.1:8000:8000"
     depends_on:
       - db
+    networks:
+      - tldnet
   db:
     image: postgres:15
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - env.prod.db
+    networks:
+      - tldnet
 volumes:
   postgres_data:
+
+networks:
+  tldnet:
+      driver: bridge
+      enable_ipv6: true
+      ipam:
+        config:
+          - subnet: "2a01:4f8:1c1b:7011::2:0/112"
