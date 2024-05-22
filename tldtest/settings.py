@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'admin_extra_buttons',
+    'axfr.apps.AxfrConfig',
     'tldtester.apps.TldtesterConfig',
     'tldtest',
     'compressor',
