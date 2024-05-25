@@ -14,12 +14,12 @@ class TLDSerializer(serializers.ModelSerializer):
 
 
 class TLDViewSet(viewsets.ModelViewSet):
-    queryset = TLD.objects.all().order_by('-tld')
+    queryset = TLD.objects.all()
     serializer_class = TLDSerializer
     http_method_names = ['get', 'head']
 
     def get_queryset(self):
-        queryset = TLD.objects.all()
+        queryset = TLD.objects.all().order_by('tld')
         query_params = self.request.query_params.copy()
 
         # Remove 'format' from query_params
