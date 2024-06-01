@@ -69,20 +69,22 @@ def dbwriter(unicodetld, stack, measurement):
         db = Atlas()
         db.unicodetld = unicodetld
         db.stack = stack
-    db.measurement = measurement
+    if measurement is not None:
+        db.measurement = measurement
     db.save()
     tld = TLD.objects.filter(unicodetld=unicodetld)
     if tld.exists():
         primary_key = tld.values_list('pk', flat=True).first()
         db = TLD.objects.get(pk=primary_key)
-        if stack == 4:
-            db.atlasv4 = measurement
-            db.save()
-        elif stack == 6:
-            db.atlasv6 = measurement
-            db.save()
-        else:
-            print("Unknown IP version")
+        if measurement is not None:
+            if stack == 4:
+                db.atlasv4 = measurement
+                db.save()
+            elif stack == 6:
+                db.atlasv6 = measurement
+                db.save()
+            else:
+                print("Unknown IP version")
 
 
 def main():
