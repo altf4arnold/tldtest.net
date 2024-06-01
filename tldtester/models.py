@@ -39,8 +39,8 @@ class TLD(models.Model):
     organisation = models.CharField(max_length=100)
     rdap = models.CharField(max_length=10, default="No")
     link = models.CharField(max_length=800, default="https://tldtest.net/")
-    atlasv4 = models.IntegerField(default=0, blank=True, null=True)
-    atlasv6 = models.IntegerField(default=0, blank=True, null=True)
+    atlasv4 = models.IntegerField(blank=True, null=True)
+    atlasv6 = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.tld
