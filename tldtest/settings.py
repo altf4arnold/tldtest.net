@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'admin_extra_buttons',
     'tldtester.apps.TldtesterConfig',
+    'atlas.apps.AtlasConfig',
     'tldtest',
     'compressor',
     'rest_framework',
