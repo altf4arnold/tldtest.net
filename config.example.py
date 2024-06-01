@@ -9,3 +9,7 @@ DBUSER = "tldtest"
 DBPASSWORD = "clubmate2010"
 
 CSRF_TRUSTED_ORIGINS = []
+
+ATLAS_API = ""
+
+BILLING_RIPE = ""
