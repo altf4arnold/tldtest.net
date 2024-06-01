@@ -58,6 +58,7 @@ def webrequest(tld, stack):
         measurement = None
     dbwriter(tld, stack, measurement)
 
+
 def dbwriter(unicodetld, stack, measurement):
     tld = Atlas.objects.filter(unicodetld=unicodetld)
     tldstack = tld.filter(stack=stack)
@@ -70,6 +71,18 @@ def dbwriter(unicodetld, stack, measurement):
         db.stack = stack
     db.measurement = measurement
     db.save()
+    tld = TLD.objects.filter(unicodetld=unicodetld)
+    if tld.exists():
+        primary_key = tld.values_list('pk', flat=True).first()
+        db = TLD.objects.get(pk=primary_key)
+        if stack == 4:
+            db.atlasv4 = measurement
+            db.save()
+        elif stack == 6:
+            db.atlasv6 = measurement
+            db.save()
+        else:
+            print("Unknown IP version")
 
 
 def main():
@@ -82,6 +95,7 @@ def main():
     for tld in unicodetlds:
         webrequest(tld, 4)
         webrequest(tld, 6)
+
 
 if __name__ == "__main__":
     main()
