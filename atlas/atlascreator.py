@@ -1,8 +1,11 @@
 import requests
 import config
+from tldtester.models import TLD
+from .models import Atlas
 
 
-def webrequest():
+def webrequest(tld, stack):
+    description_string = ("DNS measurement for " + tld + " in IPv" + str(stack))
     url = "https://atlas.ripe.net/api/v2/measurements/"
     api_key = config.ATLAS_API
     headers = {
@@ -13,9 +16,9 @@ def webrequest():
         "definitions": [
             {
                 "type": "dns",
-                "af": 6,
+                "af": stack,
                 "resolve_on_probe": True,
-                "description": "DNS measurement for be",
+                "description": description_string,
                 "query_class": "IN",
                 "query_type": "SOA",
                 "use_macros": False,
@@ -32,7 +35,7 @@ def webrequest():
                 "timeout": 5000,
                 "use_probe_resolver": True,
                 "set_nsid_bit": True,
-                "query_argument": "be"
+                "query_argument": tld
             }
         ],
         "probes": [
@@ -48,12 +51,37 @@ def webrequest():
 
     response = requests.post(url, headers=headers, json=data)
 
-    print(response.status_code)
-    print(response.json())
-    print("https://atlas.ripe.net/measurementdetail/")
+    if response.status_code == 201:
+        data = (response.json())
+        measurement = data['measurements'][0]
+    else:
+        measurement = None
+    dbwriter(tld, stack, measurement)
 
-def dbwriter(response):
-    print(response)
+def dbwriter(unicodetld, stack, measurement):
+    tld = Atlas.objects.filter(unicodetld=unicodetld)
+    tldstack = tld.filter(stack=stack)
+    if tldstack.exists():
+        primary_key = tldstack.values_list('pk', flat=True).first()
+        db = Atlas.objects.get(pk=primary_key)
+    else:
+        db = Atlas()
+        db.unicodetld = unicodetld
+        db.stack = stack
+    db.measurement = measurement
+    db.save()
+
 
 def main():
-    dbwriter(webrequest())
+    unicodetlds = []
+    # This will get the TLD's in unicode format from the database and put them in the list
+    tlds = TLD.objects.all().order_by('tld')
+    for tld in tlds:
+        db = TLD.objects.get(tld=tld)
+        unicodetlds.append(db.unicodetld)
+    for tld in unicodetlds:
+        webrequest(tld, 4)
+        webrequest(tld, 6)
+
+if __name__ == "__main__":
+    main()
