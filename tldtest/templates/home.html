@@ -6,13 +6,14 @@
                 <table class="table-auto border-separate border border-slate-500">
                     <thead>
                     <tr>
-                        <th class="border border-slate-600">Top Level Domain</th>
-                        <th class="border border-slate-600 text-l-blue-600">Total servers</th>
+                        <th class="border border-slate-600">TLD</th>
+                        <th class="border border-slate-600 text-l-blue-600"># Servers</th>
                         <th class="border border-slate-600 text-red-700">IPv4</th>
                         <th class="border border-slate-600 text-green-600">IPv6</th>
                         <th class="border border-slate-600">Strongest DNSSEC algo</th>
-                        <th class="border border-slate-600"># DNSSEC keys</th>
+                        <th class="border border-slate-600"># keys</th>
                         <th class="border border-slate-600">RDAP</th>
+                        <th class="border border-slate-600">latency-map</th>
                         <th class="border border-slate-600">Organisation</th>
                     </tr>
                     </thead>
@@ -31,6 +32,7 @@
                             {% else %}
                                 <td class="border border-slate-700 text-red-700">{{ TLD.rdap }}</td>
                             {% endif %}
+                            <td class="border border-slate-700"><a class="text-red-700 underline" href="https://atlas.ripe.net/measurementdetail/{{ TLD.atlasv4 }}" target="_blank">IPv4</a> <a class="text-green-600 underline" href="https://atlas.ripe.net/measurementdetail/{{ TLD.atlasv6 }}" target="_blank">IPv6</a></td>
                             <td class="border border-slate-700"><a href="{{ TLD.link }}"
                                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                                                    target="_blank"
