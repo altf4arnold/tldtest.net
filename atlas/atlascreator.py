@@ -5,7 +5,7 @@ from .models import Atlas
 
 
 def webrequest(tld, stack):
-    description_string = ("DNS measurement for " + tld + " in IPv" + str(stack))
+    description_string = ("DNS measurement for ." + tld + " in IPv" + str(stack))
     url = "https://atlas.ripe.net/api/v2/measurements/"
     api_key = config.ATLAS_API
     headers = {
