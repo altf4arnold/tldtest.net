@@ -95,8 +95,10 @@ def main():
         db = TLD.objects.get(tld=tld)
         unicodetlds.append(db.unicodetld)
     for tld in unicodetlds:
-        webrequest(tld, 4)
-        webrequest(tld, 6)
+        if db.atlasv4 is None:
+            webrequest(tld, 4)
+        if db.atlasv6 is None:
+            webrequest(tld, 6)
 
 
 if __name__ == "__main__":
