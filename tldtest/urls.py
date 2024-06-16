@@ -22,9 +22,7 @@ favicon_view = RedirectView.as_view(url='https://static.tldtest.net/images/image
 
 
 urlpatterns = [
-    path("", Index.as_view(), name="home"),
-    path("about/", About.as_view(), name="about"),
-    path("latency/", Latency.as_view(), name="latency"),
+    path("", Index.as_view(), name="main"),
     re_path(r'^favicon\.ico$', favicon_view),
     path('admin/', admin.site.urls),
     path('api/', include("tldtest.apiurls"))
