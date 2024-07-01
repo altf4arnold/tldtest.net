@@ -79,7 +79,7 @@ mccabe==0.7.0
     # via
     #   -r requirements.in
     #   flake8
-packaging==24.0
+packaging==24.1
     # via
     #   -r requirements.in
     #   build
