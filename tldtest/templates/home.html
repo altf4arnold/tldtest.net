@@ -15,6 +15,7 @@
                         <th class="border border-slate-600">RDAP</th>
                         <th class="border border-slate-600">latency-map</th>
                         <th class="border border-slate-600">Organisation</th>
+                        <th class="border border-slate-600">ICANN wiki</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,9 @@
                                                                    target="_blank"
                                                                    rel="noopener noreferrer">{{ TLD.organisation }}</a>
                             </td>
+                            <td class="border border-slate-700"><a href="https://icannwiki.org/.{{ TLD.tld }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                                                   target="_blank"
+                                                                   rel="noopener noreferrer">.{{ TLD.unicodetld }}</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
