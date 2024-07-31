@@ -67,7 +67,7 @@ def dbwriter(intld, stack, measurement):
         db = Atlas.objects.get(pk=primary_key)
     else:
         db = Atlas()
-        db.tld = tld
+        db.tld = intld
         db.stack = stack
     if measurement is not None:
         db.measurement = measurement
@@ -88,13 +88,13 @@ def dbwriter(intld, stack, measurement):
 
 
 def main():
-    unicodetlds = []
+    tldslist = []
     # This will get the TLD's in unicode format from the database and put them in the list
     tlds = TLD.objects.all().order_by('tld')
     for tld in tlds:
         db = TLD.objects.get(tld=tld)
         tlds.append(db.tld)
-    for tld in tlds:
+    for tld in tldslist:
         db = TLD.objects.get(tld=tld)
         if db.atlasv4 is None:
             webrequest(tld, 4)
