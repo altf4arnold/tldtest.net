@@ -59,8 +59,8 @@ def webrequest(tld, stack):
     dbwriter(tld, stack, measurement)
 
 
-def dbwriter(unicodetld, stack, measurement):
-    tld = Atlas.objects.filter(tld=tld)
+def dbwriter(intld, stack, measurement):
+    tld = Atlas.objects.filter(tld=intld)
     tldstack = tld.filter(stack=stack)
     if tldstack.exists():
         primary_key = tldstack.values_list('pk', flat=True).first()
@@ -72,7 +72,7 @@ def dbwriter(unicodetld, stack, measurement):
     if measurement is not None:
         db.measurement = measurement
     db.save()
-    tld = TLD.objects.filter(tld=tld)
+    tld = TLD.objects.filter(tld=intld)
     if tld.exists():
         primary_key = tld.values_list('pk', flat=True).first()
         db = TLD.objects.get(pk=primary_key)
