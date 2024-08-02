@@ -95,7 +95,7 @@ def main():
         db = TLD.objects.get(tld=tld)
         tldslist.append(db.tld)
     for tld in tldslist:
-        db = TLD.objects.get(unicodetld=tld)
+        db = TLD.objects.get(tld=tld)
         if db.atlasv4 is None:
             webrequest(tld, 4)
         if db.atlasv6 is None:
