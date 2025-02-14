@@ -46,6 +46,56 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() { // Wait for content to be loaded
+                        const table = document.querySelector('table');
+                        const headers = table.querySelectorAll('th');
+                        const tableBody = table.querySelector('tbody');
+                        const rows = Array.from(tableBody.querySelectorAll('tr'));
+                    
+                        const numericColumns = [1, 2, 3, 5]; // Columns that should be sorted numerically (nb of servers and keys)
+                        const dnssecColumnIndex = 4; // Column w/ custom sorting (None before Algo version)
+                    
+                        function getCellText(row, index) {
+                            return row.querySelector(`td:nth-child(${index + 1})`).textContent.trim();
+                        }
+                    
+                        function compareValues(aText, bText, isNumeric, isAscending) {
+                            if (isNumeric) {
+                                return isAscending ? parseFloat(aText) - parseFloat(bText) : parseFloat(bText) - parseFloat(aText);
+                            } else {
+                                return isAscending
+                                    ? aText.localeCompare(bText, undefined, { numeric: true })
+                                    : bText.localeCompare(aText, undefined, { numeric: true });
+                            }
+                        }
+                    
+                        headers.forEach((header, index) => {
+                            header.addEventListener('click', () => {
+                                const isAscending = header.classList.contains('th-sort-asc');
+                                headers.forEach(th => th.classList.remove('th-sort-asc', 'th-sort-desc'));
+                                header.classList.toggle('th-sort-asc', !isAscending);
+                                header.classList.toggle('th-sort-desc', isAscending);
+                    
+                                const sortedRows = rows.sort((a, b) => {
+                                    const aText = getCellText(a, index);
+                                    const bText = getCellText(b, index);
+                    
+                                    if (index === dnssecColumnIndex) {
+                                        const aValue = aText === "None" ? -1 : parseInt(aText.replace("Algo ", ""));
+                                        const bValue = bText === "None" ? -1 : parseInt(bText.replace("Algo ", ""));
+                                        return isAscending ? aValue - bValue : bValue - aValue;
+                                    } else {
+                                        const isNumeric = numericColumns.includes(index);
+                                        return compareValues(aText, bText, isNumeric, isAscending);
+                                    }
+                                });
+                    
+                                sortedRows.forEach(row => tableBody.appendChild(row));
+                            });
+                        });
+                    });
+                    </script>
             </div>
         </div>
     </div>
