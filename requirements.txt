@@ -67,7 +67,7 @@ future==1.0.0
     # via
     #   -r requirements.in
     #   exscript
-gunicorn==22.0.0
+gunicorn==23.0.0
     # via -r requirements.in
 idna==3.7
     # via
