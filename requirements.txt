@@ -41,7 +41,7 @@ cryptography==44.0.1
     # via
     #   -r requirements.in
     #   paramiko
-django==5.0.13
+django==5.0.14
     # via
     #   -r requirements.in
     #   django-appconf
