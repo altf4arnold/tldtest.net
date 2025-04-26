@@ -2,7 +2,8 @@
 This file is dumping the IANA root zone and sorting it in the database
 Link to IANA website : https://www.internic.net/domain/root.zone
 """
-import json, time
+import json
+import line
 import urllib.request
 from tldtester.models import TLD, RootZone
 from django.core.exceptions import MultipleObjectsReturned
