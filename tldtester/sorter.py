@@ -3,8 +3,8 @@ This file is dumping the IANA root zone and sorting it in the database
 Link to IANA website : https://www.internic.net/domain/root.zone
 """
 import json
-import time
 import urllib.request
+import requests_cache
 from tldtester.models import TLD, RootZone
 from django.core.exceptions import MultipleObjectsReturned
 
@@ -96,6 +96,7 @@ def grabber(data, rdaptlds):
     This function takes the TLD's and makes querrys to the DNS. It looks up how many authoritative DNS's there are and
     analyses the v4, v6 and DNSSEC. Returns a list of dictionaries with all the vallues to write in the database
     """
+    requests_cache.install_cache('my_simple_cache')
     for tld in data:
         nsservers = []
         dnsseckeys = []
@@ -139,7 +140,6 @@ def grabber(data, rdaptlds):
                 print(tld + " DNSSEC " + e)
                 algo = 300
         # Who registers the thing and get unicode
-        time.sleep(0.1)
         rdap = urllib.request.urlopen("https://rdap.iana.org/domain/" + tld)
         if rdap.getcode() == 200:
             raw = rdap.read().decode("utf-8")
