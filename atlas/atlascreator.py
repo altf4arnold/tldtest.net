@@ -69,8 +69,6 @@ def dbwriter(intld, stack, measurement):
         db = Atlas()
         db.unicodetld = intld
         db.stack = stack
-    if measurement is not None:
-        db.measurement = measurement
     db.save()
     tld = TLD.objects.filter(tld=intld)
     if tld.exists():
