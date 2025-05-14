@@ -74,15 +74,14 @@ def dbwriter(intld, stack, measurement):
     if tld.exists():
         primary_key = tld.values_list('pk', flat=True).first()
         db = TLD.objects.get(pk=primary_key)
-        if measurement is not None:
-            if stack == 4:
-                db.atlasv4 = measurement
-                db.save()
-            elif stack == 6:
-                db.atlasv6 = measurement
-                db.save()
-            else:
-                print("Unknown IP version")
+        if stack == 4:
+            db.atlasv4 = measurement
+            db.save()
+        elif stack == 6:
+            db.atlasv6 = measurement
+            db.save()
+        else:
+            print("Unknown IP version")
 
 
 def main():
