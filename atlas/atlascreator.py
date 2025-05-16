@@ -96,8 +96,10 @@ def main():
         tldslist.append(db.tld)
     for tld in tldslist:
         db = TLD.objects.get(tld=tld)
-        webrequest(tld, 4)
-        webrequest(tld, 6)
+        if db.atlasv4 is None:
+            webrequest(tld, 4)
+        if db.atlasv6 is None:
+            webrequest(tld, 6)
 
 
 if __name__ == "__main__":
