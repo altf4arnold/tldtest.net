@@ -34,7 +34,7 @@ pyflakes==3.2.0
 PyNaCl==1.5.0
 pyproject_hooks==1.1.0
 rcssmin==1.1.1
-requests==2.32.3
+requests==2.32.4
 requests-cache==1.2.1
 rjsmin==1.2.1
 sqlparse==0.5.0
