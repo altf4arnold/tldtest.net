@@ -9,10 +9,10 @@ charset-normalizer==3.3.2
 click==8.1.7
 configparser==7.0.0
 cryptography==44.0.1
-Django==5.0.14
+Django==5.1.10
 django-admin-extra-buttons==1.5.8
 django-appconf==1.0.6
-django-compressor==4.4
+django-compressor==4.5
 django-filter==24.2
 djangorestframework==3.15.2
 Exscript==2.6.28
@@ -33,10 +33,10 @@ pycryptodomex==3.20.0
 pyflakes==3.2.0
 PyNaCl==1.5.0
 pyproject_hooks==1.1.0
-rcssmin==1.1.1
+rcssmin==1.1.2
 requests==2.32.4
 requests-cache==1.2.1
-rjsmin==1.2.1
+rjsmin==1.2.2
 sqlparse==0.5.0
 tomli==2.0.1
 typing_extensions==4.12.2
