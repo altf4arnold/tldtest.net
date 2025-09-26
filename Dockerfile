@@ -5,7 +5,7 @@ WORKDIR /opt
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apt update && apt install -y libpq-dev build-essential netcat && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y libpq-dev build-essential netcat-traditional && rm -rf /var/lib/apt/lists/*
 
 COPY ./requirements.txt .
 
