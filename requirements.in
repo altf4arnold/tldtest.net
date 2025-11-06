@@ -9,7 +9,7 @@ charset-normalizer==3.3.2
 click==8.1.7
 configparser==7.0.0
 cryptography==44.0.1
-Django==5.1.13
+Django==5.1.14
 django-admin-extra-buttons==1.5.8
 django-appconf==1.0.6
 django-compressor==4.5
