@@ -26,6 +26,7 @@ packaging==24.1
 paramiko==3.4.0
 pip-tools==7.5.3
 platformdirs==4.3.7
+psycopg==3.3.2
 pycodestyle==2.11.1
 pycparser==2.22
 pycryptodomex==3.20.0
