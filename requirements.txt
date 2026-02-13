@@ -106,6 +106,8 @@ platformdirs==4.3.7
     # via
     #   -r requirements.in
     #   requests-cache
+psycopg==3.3.2
+    # via -r requirements.in
 pycodestyle==2.11.1
     # via
     #   -r requirements.in
