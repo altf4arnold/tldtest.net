@@ -84,7 +84,7 @@ idna==3.7
     #   -r requirements.in
     #   requests
     #   url-normalize
-markdown==3.6
+markdown==3.8.1
     # via -r requirements.in
 mccabe==0.7.0
     # via
