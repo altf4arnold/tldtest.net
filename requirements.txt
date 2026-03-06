@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
-asgiref==3.8.1
+asgiref==3.11.1
     # via
     #   -r requirements.in
     #   django
@@ -50,7 +50,7 @@ cryptography==46.0.5
     # via
     #   -r requirements.in
     #   paramiko
-django==5.1.15
+django==6.0.3
     # via
     #   -r requirements.in
     #   django-appconf
