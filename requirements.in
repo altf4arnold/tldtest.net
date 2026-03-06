@@ -20,7 +20,7 @@ flake8==7.0.0
 future==1.0.0
 gunicorn==23.0.0
 idna==3.7
-Markdown==3.6
+Markdown==3.8.1
 mccabe==0.7.0
 packaging==24.1
 paramiko==3.4.0
