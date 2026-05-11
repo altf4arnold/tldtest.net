@@ -42,5 +42,5 @@ sqlparse==0.5.4
 tomli==2.0.1
 typing_extensions==4.12.2
 url-normalize==2.2.1
-urllib3==2.6.3
+urllib3==2.7.0
 wheel==0.46.2
