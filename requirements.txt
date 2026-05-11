@@ -159,7 +159,7 @@ url-normalize==2.2.1
     # via
     #   -r requirements.in
     #   requests-cache
-urllib3==2.6.3
+urllib3==2.7.0
     # via
     #   -r requirements.in
     #   requests
