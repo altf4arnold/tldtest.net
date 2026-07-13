@@ -50,7 +50,7 @@ cryptography==48.0.1
     # via
     #   -r requirements.in
     #   paramiko
-django==6.0.5
+django==6.0.6
     # via
     #   -r requirements.in
     #   django-appconf
