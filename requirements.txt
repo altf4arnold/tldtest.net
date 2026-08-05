@@ -46,7 +46,7 @@ configparser==7.0.0
     # via
     #   -r requirements.in
     #   exscript
-cryptography==48.0.1
+cryptography==50.0.0
     # via
     #   -r requirements.in
     #   paramiko
