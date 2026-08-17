@@ -38,7 +38,7 @@ requests==2.33.0
 requests-cache==1.2.1
 rjsmin==1.2.2
 setuptools==83.0.0
-sqlparse==0.5.4
+sqlparse==0.6.0
 tomli==2.0.1
 typing_extensions==4.12.2
 url-normalize==2.2.1
